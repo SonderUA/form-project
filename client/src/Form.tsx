@@ -15,10 +15,22 @@ const Form: React.FC = () => {
 		country: "",
 		agreement: false,
 	});
+	const ranges = ["0 - 10", "11 - 50", "51 - 200", "201 - 500"];
 
 	function handleFormSubmit(event: React.FormEvent) {
 		event.preventDefault();
 		return;
+	}
+
+	function handleRangeChange(event: React.MouseEvent<HTMLButtonElement>) {
+		event.preventDefault();
+		const text = event.currentTarget.textContent;
+		if (text && ranges.includes(text)) {
+			setForm((prevForm) => ({
+				...prevForm,
+				range: text,
+			}));
+		}
 	}
 
 	return (
@@ -37,8 +49,22 @@ const Form: React.FC = () => {
 					placeholder="Enter role or job title"
 					className="mt-2 py-3 px-4 border-neutral-400 border-[1px] border-opacity-50 rounded-lg shadow-sm focus:outline-none"
 				/>
-				<p>How many people are there in your team?</p>
-				{/* Add buttons selection */}
+				<p className="mt-6">How many people are there in your team?</p>
+				<div className="flex w-full gap-2 mt-2 flex-wrap">
+					{ranges.map((range) => (
+						<button
+							key={range}
+							className={`border-2 px-4 py-3 rounded-lg ${
+								range === form.range
+									? "bg-gray-100 border-blue-700"
+									: "hover:bg-gray-200 hover:border-gray-300"
+							}`}
+							onClick={handleRangeChange}
+						>
+							{range}
+						</button>
+					))}
+				</div>
 				<label htmlFor="country" className="mt-6">
 					Country
 				</label>

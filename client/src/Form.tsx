@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { countries } from "countries-list";
 import { GrFormCheckmark } from "react-icons/gr";
+import { CiCircleInfo } from "react-icons/ci";
 
 type FormData = {
 	role: string;
@@ -156,7 +157,9 @@ const Form: React.FC = () => {
 							I'm okay with sharing this with the Baserow team.
 						</label>
 					</div>
-					{/* Add info icon */}
+					<a href="/">
+						<CiCircleInfo className="w-5 h-5" />
+					</a>
 				</div>
 				<div className="text-center mt-20">
 					<button

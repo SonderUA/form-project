@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { countries } from "countries-list";
 
 type FormData = {
 	role: string;
@@ -16,6 +17,11 @@ const Form: React.FC = () => {
 		agreement: false,
 	});
 	const ranges = ["0 - 10", "11 - 50", "51 - 200", "201 - 500"];
+
+	const countriesList = Object.entries(countries).map(([code, details]) => ({
+		code,
+		...details,
+	}));
 
 	function handleFormSubmit(event: React.FormEvent) {
 		event.preventDefault();
@@ -37,6 +43,19 @@ const Form: React.FC = () => {
 			setForm((prevForm) => ({
 				...prevForm,
 				range: text,
+			}));
+		}
+	}
+
+	function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+		const { value } = event.target;
+		const countryExists = countriesList.filter(
+			(country) => country.name === value
+		);
+		if (countryExists) {
+			setForm((prevForm) => ({
+				...prevForm,
+				country: value,
 			}));
 		}
 	}
@@ -84,10 +103,23 @@ const Form: React.FC = () => {
 					name="country"
 					id="country"
 					className="mt-2 py-3 px-2 border-neutral-400 border-[1px] border-opacity-50 rounded-lg shadow-sm focus:outline-none"
+					defaultValue={""}
+					onChange={handleSelectChange}
 				>
-					<option value="">Select value</option>
+					<option value="" disabled>
+						Select value
+					</option>
+					{countriesList.map((country) => (
+						<option
+							key={country.code}
+							value={country.name}
+							className="text-gray-400"
+						>
+							{country.name}
+						</option>
+					))}
 				</select>
-				<div className="flex justify-between items-center mt-8">
+				<div className="flex justify-between items-center mt-10">
 					<div className="flex items-center gap-2">
 						{/* Add custom checkbox */}
 						<input type="checkbox" name="" id="" />

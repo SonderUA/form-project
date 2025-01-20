@@ -5,7 +5,7 @@ function App() {
 	return (
 		<div>
 			<Header />
-			<main>
+			<main className="flex justify-center">
 				<Form />
 			</main>
 		</div>

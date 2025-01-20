@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { countries } from "countries-list";
 import { GrFormCheckmark } from "react-icons/gr";
 import { CiCircleInfo } from "react-icons/ci";
+import axios from "axios";
 
 type FormData = {
 	role: string;
@@ -25,10 +26,21 @@ const Form: React.FC = () => {
 		...details,
 	}));
 
-	function handleFormSubmit(event: React.FormEvent) {
+	const handleFormSubmit = async (
+		event: React.ChangeEvent<HTMLFormElement>
+	) => {
 		event.preventDefault();
-		return;
-	}
+		try {
+			const response = await axios.post(
+				"http://localhost:7070/form",
+				form
+			);
+
+			alert(response.data.message);
+		} catch (error: any) {
+			alert(error.response.data.message || "An error occurred!");
+		}
+	};
 
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const { value } = event.target;

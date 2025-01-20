@@ -1,4 +1,11 @@
 const express = require("express");
+const cors = require("cors");
+
+// Middleware
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const app = express();
 
 app.get("/", (req, res) => {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { countries } from "countries-list";
+import { GrFormCheckmark } from "react-icons/gr";
 
 type FormData = {
 	role: string;
@@ -60,6 +61,11 @@ const Form: React.FC = () => {
 		}
 	}
 
+	function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const { checked } = event.target;
+		setForm((prevForm) => ({ ...prevForm, agreement: checked }));
+	}
+
 	return (
 		<div className="flex flex-col w-full max-w-md my-6 p-4">
 			<h2 className="text-2xl font-medium tracking-wide my-4">
@@ -88,7 +94,7 @@ const Form: React.FC = () => {
 							className={`border-2 px-4 py-3 rounded-lg ${
 								range === form.range
 									? "bg-gray-100 border-blue-700"
-									: "hover:bg-gray-200 hover:border-gray-300"
+									: "hover:bg-gray-100 hover:border-gray-200"
 							}`}
 							onClick={handleRangeChange}
 						>
@@ -120,11 +126,34 @@ const Form: React.FC = () => {
 					))}
 				</select>
 				<div className="flex justify-between items-center mt-10">
-					<div className="flex items-center gap-2">
-						{/* Add custom checkbox */}
-						<input type="checkbox" name="" id="" />
-						<label htmlFor="">
-							I'm okay with sharing this with Baserow team.
+					<div className="flex items-center">
+						<label
+							htmlFor="agreement"
+							className="flex gap-2 items-center cursor-pointer"
+						>
+							<input
+								type="checkbox"
+								name="agreement"
+								id="agreement"
+								className="opacity-0 cursor-pointer absolute"
+								checked={form.agreement}
+								onChange={handleCheckboxChange}
+								required
+							/>
+							<div
+								className={`flex items-center flex-shrink-0 justify-center w-5 h-5 border-neutral-400 border-[1px] rounded-md border-opacity-50 ${
+									form.agreement
+										? "bg-blue-700 opacity-85 border-blue-800"
+										: ""
+								}`}
+							>
+								{form.agreement ? (
+									<GrFormCheckmark className="text-white" />
+								) : (
+									<></>
+								)}
+							</div>
+							I'm okay with sharing this with the Baserow team.
 						</label>
 					</div>
 					{/* Add info icon */}

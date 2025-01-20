@@ -22,6 +22,14 @@ const Form: React.FC = () => {
 		return;
 	}
 
+	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const { value } = event.target;
+		setForm((prevForm) => ({
+			...prevForm,
+			role: value,
+		}));
+	}
+
 	function handleRangeChange(event: React.MouseEvent<HTMLButtonElement>) {
 		event.preventDefault();
 		const text = event.currentTarget.textContent;
@@ -48,6 +56,10 @@ const Form: React.FC = () => {
 					name="role"
 					placeholder="Enter role or job title"
 					className="mt-2 py-3 px-4 border-neutral-400 border-[1px] border-opacity-50 rounded-lg shadow-sm focus:outline-none"
+					autoComplete="off"
+					value={form.role}
+					onChange={handleInputChange}
+					required
 				/>
 				<p className="mt-6">How many people are there in your team?</p>
 				<div className="flex w-full gap-2 mt-2 flex-wrap">

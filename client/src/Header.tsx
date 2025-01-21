@@ -4,7 +4,7 @@ import CircularProgressBar from "./CircularProgressBar";
 
 const Header: React.FC = () => {
 	return (
-		<header className="flex p-8 justify-around items-center">
+		<header className="flex p-8 justify-between sm:justify-around items-center">
 			<div>
 				<a href="/" className="flex items-center gap-2">
 					<TfiAlignJustify className="text-2xl" />

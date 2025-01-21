@@ -3,6 +3,7 @@ import { countries } from "countries-list";
 import { GrFormCheckmark } from "react-icons/gr";
 import { CiCircleInfo } from "react-icons/ci";
 import axios from "axios";
+import FormSubmit from "./FormSubmit";
 
 type FormData = {
 	role: string;
@@ -173,17 +174,7 @@ const Form: React.FC = () => {
 						<CiCircleInfo className="w-5 h-5" />
 					</a>
 				</div>
-				<div className="text-center mt-20">
-					<button
-						type="submit"
-						className="w-full bg-blue-700 opacity-85 text-white py-3 rounded-lg"
-					>
-						Continue
-					</button>
-					<p className="mt-5 text-gray-500">
-						<a href="/">Skip for now</a>
-					</p>
-				</div>
+				<FormSubmit className="mt-20" text="Continue" />
 			</form>
 		</div>
 	);

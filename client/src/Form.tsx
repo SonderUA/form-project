@@ -60,12 +60,12 @@ const Form: React.FC = () => {
 	function handleRangeChange(event: React.MouseEvent<HTMLButtonElement>) {
 		event.preventDefault();
 		const text = event.currentTarget.textContent;
-		if (text && ranges.includes(text)) {
-			setForm((prevForm) => ({
-				...prevForm,
-				range: text,
-			}));
-		}
+		if (!text || !ranges.includes(text)) return;
+
+		setForm((prevForm) => ({
+			...prevForm,
+			range: text,
+		}));
 	}
 
 	function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -73,12 +73,12 @@ const Form: React.FC = () => {
 		const countryExists = countriesList.filter(
 			(country) => country.name === value
 		);
-		if (countryExists) {
-			setForm((prevForm) => ({
-				...prevForm,
-				country: value,
-			}));
-		}
+		if (!countryExists) return;
+
+		setForm((prevForm) => ({
+			...prevForm,
+			country: value,
+		}));
 	}
 
 	function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {

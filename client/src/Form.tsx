@@ -33,13 +33,19 @@ const Form: React.FC = () => {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				"http://localhost:7070/form",
+				import.meta.env.VITE_API_URL,
 				form
 			);
 
 			alert(response.data.message);
-		} catch (error: any) {
-			alert(error.response.data.message || "An error occurred!");
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				alert(
+					error.response?.data?.message || "An Axios error occurred"
+				);
+			} else {
+				alert("An unexpected error");
+			}
 		}
 	};
 
